@@ -38,7 +38,7 @@ It is expected that revoked `blob:` URLs go away, and do not continue to contrib
 
 ## Why does this matter?
 
-For an SPA designed to display images which uses `blob:` URLs, the app is a ticking time bomb 💣 
+For an SPA designed to display images using `blob:` URLs, the app is a ticking time bomb 💣 
 
 It will crash after the customer has navigated around to enough pages of images to leak enough memory. An SPA designed to be left open all day could reach the memory exhaustion point days after it’s initially opened, which makes debugging and reproducing super difficult.
 
