@@ -1,4 +1,4 @@
-export const thumbnails = [
+export const imgFileUrls = [
   "https://plus.unsplash.com/premium_photo-1670333352025-017f69fa481c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NDU0MTZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MjkzMjJ8&ixlib=rb-4.0.3&q=80&w=1080",
   "https://plus.unsplash.com/premium_photo-1670966448732-3c44e2123096?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NDU0MTZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MjkzMjJ8&ixlib=rb-4.0.3&q=80&w=1080",
   "https://plus.unsplash.com/premium_photo-1671995576549-4c9b7f0986f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NDU0MTZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MjkzMjJ8&ixlib=rb-4.0.3&q=80&w=1080",
