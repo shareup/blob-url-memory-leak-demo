@@ -2,8 +2,7 @@
 
 ## Revoking with `URL.revokeObjectURL()` does not adequately free memory
 
-**Meaning a window/tab will eventually crash from memory exhaustion after normal
-navigation of an SPA that correctly creates and revokes `object URLs`.**
+**Meaning a window/tab will eventually crash from memory exhaustion after normal navigation of an SPA that correctly creates and revokes `object URLs`.**
 
 ## Setup
 
