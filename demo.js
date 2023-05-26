@@ -52,7 +52,6 @@ async function runTest(times, shouldRenderImages) {
 
   while (runs < times) {
     const urls = await createOneHundredBlobURLs()
-    const log = `Loaded ${runs} of ${times} pages which created${shouldRenderImages ? ', displayed' : ''} and revoked ${runs * 100} object URLs.`
     await wait()
 
     if (shouldRenderImages) {
@@ -66,12 +65,13 @@ async function runTest(times, shouldRenderImages) {
 
     revokeURLs(urls)
     advanceCursor()
-    print(log)
+    print(' . ')
     await wait()
     runs += 1
   }
 
   log('Done. Succeeded.')
+  log(`Loaded ${runs} of ${times} pages which created${shouldRenderImages ? ', displayed, ' : ''} and revoked ${runs * 100} object URLs.`)
 }
 
 // test steps
@@ -147,7 +147,7 @@ function log(msg) {
 
 function print(msg) {
   console.debug('print', msg)
-  logs.innerText = msg
+  logs.innerText += msg
 }
 
 function clearLogs() {
