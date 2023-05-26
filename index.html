@@ -1,90 +1,88 @@
 <!doctype html>
 <html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      }
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root {
-      --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    }
+      body {
+        font-family: var(--system-ui);
+        line-height: 1.5;
+      }
 
-    body {
-      font-family: var(--system-ui);
-      line-height: 1.5;
-    }
+      p {
+        max-width: 46em;
+      }
 
-    p {
-      max-width: 46em;
-    }
+      code {
+        font-size: 1.2em;
+        font-weight: bolder;
+      }
 
-    code {
-      font-size: 1.2em;
-      font-weight: bolder;
-    }
+      label {
+        display: block;
+        margin: 0 0 1em;
+      }
 
-    label {
-      display: block;
-      margin: 0 0 1em;
-    }
+      ul {
+        box-sizing: border-box;
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        margin: 0 auto;
+        max-width: 650px;
+        padding: 10px;
+      }
 
-    ul {
-      box-sizing: border-box;
-      display: grid;
-      gap: 10px;
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-      margin: 0 auto;
-      max-width: 650px;
-      padding: 10px;
-    }
+      li {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        width: 100%;
+      }
 
-    li {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      justify-content: center;
-      width: 100%;
-    }
+      img {
+        height: auto;
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        overflow: hidden;
+        width: auto;
+      }
+    </style>
+  </head>
 
-    img {
-      height: auto;
-      max-height: 100%;
-      max-width: 100%;
-      object-fit: contain;
-      overflow: hidden;
-      width: auto;
-    }
-  </style>
-</head>
+  <body>
+    <h1>Demo of <code>object URL</code> memory leak in Safari</h1>
+    <p>
+      This demo paginates through images which use <code>object URLs</code> for display without reloading the page.
+    </p>
+    <p>
+      A real-world example for this could be an SPA showing E2EE data would download, decrypt, and then use an <code>object URL</code> to display or download the file.
+    </p>
+    <p>
+      Tabs will crash in mobile Safari after paginating through enough pages of images, whether those images are displayed or not. This makes any SPA using <code>object URLs</code> a ticking time-bomb 💣
+    </p>
 
-<body>
-  <h1>Demo of <code>object URL</code> memory leak in Safari</h1>
-  <p>
-    This demo paginates through images which use <code>object URLs</code> for display without reloading the page.
-  </p>
-  <p>
-    A real-world example for this could be an SPA showing E2EE data would download, decrypt, and then use an <code>object URL</code> to display or download the file.
-  </p>
-  <p>
-    Tabs will crash in mobile Safari after paginating through enough pages of images, whether those images are displayed or not. This makes any SPA using <code>object URLs</code> a ticking time-bomb 💣
-  </p>
+    <label>
+      <input type="checkbox">
+      Render <code>img</code> elements
+    </label>
 
-  <label>
-    <input type="checkbox">
-    Render <code>img</code> elements
-  </label>
+    <label>
+      Load <span id="slider-value">59</span> page<span id="es">s</span> with 100 images per page<br>
+      <input type="range" min="1" max="199" step="1" value="59">
+    </label>
 
-  <label>
-    Load <span id="slider-value">59</span> page<span id="es">s</span> with 100 images per page<br>
-    <input type="range" min="1" max="199" step="1" value="59">
-  </label>
+    <button>Run test</button>
 
-  <button>Run test</button>
+    <div id="logs"></div>
+    <ul></ul>
 
-  <div id="logs"></div>
-  <ul></ul>
-
-  <script type="module" src="demo.js"></script>
-</body>
-
+    <script type="module" src="demo.js"></script>
+  </body>
 </html>
