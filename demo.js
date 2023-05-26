@@ -1,8 +1,7 @@
-// NOTE: the actual files used to make blob: URLs aren't important.
+// NOTE: the actual files used to make the object URLs aren't important.
 // I used the unsplash API to gather a lot of image URLs to make the
 // testing easier, but any sufficiently large list of files would do.
-
-import { thumbnails } from './thumbnails.js'
+import { imgFileUrls } from './img-file-urls.js'
 
 const logs = document.getElementById('logs')
 const checkbox = document.querySelector('input[type=checkbox]')
@@ -49,7 +48,7 @@ self.addEventListener('load', () => console.info('Loaded.'))
 self.addEventListener('error', e => console.error(e))
 
 async function runTest(times, shouldRenderImages) {
-  print('Starting... ')
+  print('Running... ')
 
   while (runs < times) {
     const urls = await createOneHundredBlobURLs()
@@ -72,12 +71,13 @@ async function runTest(times, shouldRenderImages) {
   }
 
   log('Done. Succeeded.')
+  log(`Loaded ${runs} of ${times} pages which created${shouldRenderImages ? ', displayed, ' : ''} and revoked ${runs * 100} object URLs.`)
 }
 
 // test steps
 
 async function createOneHundredBlobURLs() {
-  const imageURLs = thumbnails.slice(cursor, cursor + 100)
+  const imageURLs = imgFileUrls.slice(cursor, cursor + 100)
   const blobURLs = []
 
   for (const url of imageURLs) {
@@ -104,10 +104,7 @@ function renderImages(urls) {
   grid.insertAdjacentHTML('beforeend', html)
 }
 
-function scrollToTheBottom() {
-  const last = document.querySelector('li:last-child')
-  last?.scrollIntoView({ behavior: "smooth" })
-}
+
 
 // NOTE: doesn't appear to actually free the memory in the "page" in Safari
 function revokeURLs(urls) {
@@ -119,19 +116,24 @@ function revokeURLs(urls) {
 function advanceCursor() {
   cursor += 100
 
-  if (cursor > thumbnails.length) {
+  if (cursor > imgFileUrls.length) {
     cursor = 0
   }
 }
 
-// lib functions
+// helper functions
 
 async function fetchPhotoFile(url) {
-  // This emulates a client downloading, decrypting, and then assembling a file
-  // which isn't directly addressable in it's unencrypted form on the server
+  // This emulates a client downloading a file, performing some operation on its bytes, and then assembling a file.
+  // An example of wanting to do this would be for E2EE where decryption must happen in the client.
   const response = await fetch(url)
   const bytes = await response.blob()
   return new File([bytes], `${cid++}.jpg`, { type: 'image/jpeg' })
+}
+
+function scrollToTheBottom(selector='li:last-child') {
+  const last = document.querySelector(selector)
+  last?.scrollIntoView({ behavior: "smooth" })
 }
 
 function wait(amount = 16) {

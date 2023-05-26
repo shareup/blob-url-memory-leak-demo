@@ -16,6 +16,11 @@
         max-width: 46em;
       }
 
+      code {
+        font-size: 1.2em;
+        font-weight: bolder;
+      }
+
       label {
         display: block;
         margin: 0 0 1em;
@@ -50,18 +55,17 @@
       }
     </style>
   </head>
+
   <body>
-    <h1>Demo of <code>blob:</code> URL memory leak in Safari</h1>
+    <h1>Demo of object URL memory leak in Safari</h1>
     <p>
-      This demo simulates paginating through pages of images which uses
-      <code>blob:</code> URLs for display. For example: an SPA showing
-      E2EE data would download, decrypt, and then use a <code>blob:</code>
-      URL to display or download the file.
+      This demo paginates through images which use object URLs for display without reloading the page.
     </p>
     <p>
-      Tabs will crash in mobile Safari after paginating through enough pages of
-      images, whether those images are displayed or not. This makes any SPA
-      using <code>blob:</code> URLs a ticking time-bomb 💣
+      A real-world example for this could be an SPA showing E2EE data would download, decrypt, and then use an object URL to display or download the file.
+    </p>
+    <p>
+      Tabs will crash in mobile Safari after paginating through enough pages of images, whether those images are displayed or not. This makes any SPA using object URLs a ticking time-bomb 💣
     </p>
 
     <label>
